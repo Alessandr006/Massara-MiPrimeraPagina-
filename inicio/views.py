@@ -12,7 +12,7 @@ def crear_publicacion(request):
         formulario = creacion_publicacion(request.POST)
         if formulario.is_valid():
             info = formulario.cleaned_data
-            Publicacion = publicacion(nombre = info.get("nombre"), autor = info.get("autor"))
+            Publicacion = publicacion(titulo = info.get("titulo"), autor = info.get("autor"), fecha_publicacion = info.get("fecha_publicacion"))
             Publicacion.save()
             return redirect("lista de publicaciones")
     else:
