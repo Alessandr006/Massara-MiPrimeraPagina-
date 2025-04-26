@@ -1,0 +1,16 @@
+
+    <h1>lista de publicaciones</h1>
+    {% if publicaciones %}
+    <ul>
+        {% for publicacion in publicaciones %}
+        <li>
+            {{publicacion}} 
+            | <a href={% url "detalles de publicación" publicacion.id %}>ver más</a>
+            | <a href={% url "modificar publicación" publicacion.id %}>modificar</a>
+            | <a href={% url "eliminar publicación" publicacion.id %}>eliminar</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay publicaciones creadas</p>
+    {% endif %}

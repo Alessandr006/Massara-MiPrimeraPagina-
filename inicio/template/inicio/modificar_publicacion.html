@@ -1,0 +1,7 @@
+
+    <h1>Modificar {{publicación}}</h1>
+    <form action="{% url "modificar publicación" publicacion.id %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="modificar">
+    </form>
