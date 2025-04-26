@@ -16,7 +16,9 @@
     <ul>
         {% for publicacion in publicaciones %}
         <li>
-            {{publicacion}} | <a href={% url "detalles de publicacion" publicacion.id %}>ver más</a>
+            {{publicacion}} 
+            | <a href={% url "detalles de publicación" publicacion.id %}>ver más</a>
+            | <a href={% url "modificar publicación" publicacion.id %}>modificar</a>
         </li>
         {% endfor %}
     </ul>

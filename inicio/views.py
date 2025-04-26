@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from inicio.forms import creacion_publicacion
 from inicio.models import publicacion
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
 
 def inicio(request):
     return render(request, 'inicio/inicio.html')
@@ -23,6 +26,12 @@ def lista_publicaciones(request):
     publicaciones = publicacion.objects.all()
     return render(request, "inicio/lista_publicaciones.html", {"publicaciones": publicaciones})
 
-def detalle_publicacion(request, publicacion_especifica):
-    Publicacion = publicacion.objects.get(id=publicacion_especifica)
-    return render(request, "inicio/detalle_publicacion.html", {"pubicacion": Publicacion})
+class detallePublicacion(DetailView):
+    model = publicacion
+    template_name = "inicio/detalle_publicacion.html"
+
+class modificarPublicacion(UpdateView):
+    model = publicacion
+    template_name = "inicio/modificar_publicacion.html"
+    fields = ["titulo", "autor"]
+    success_url = reverse_lazy("lista de publicaciones")

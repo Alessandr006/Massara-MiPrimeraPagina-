@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
     <title>Document</title>
 </head>
 <body>
@@ -11,11 +11,11 @@
         <a href= {% url "crear publicación" %} >crear publicación</a>
         <a href= {% url "lista de publicaciones" %} >lista de publicaciones</a>
     </nav>
-    <h1>crear publicación</h1>
-    <form action="{% url "crear publicación" %}" method="post">
+    <h1>Modificar {{publicación}}</h1>
+    <form action="{% url "modificar publicación" publicacion.id %}" method="post">
         {% csrf_token %}
-        {{formulario}}
-        <input type="submit" value="crear">
+        {{form}}
+        <input type="submit" value="modificar">
     </form>
 </body>
 </html>
