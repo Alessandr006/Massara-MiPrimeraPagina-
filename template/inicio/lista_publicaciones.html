@@ -16,7 +16,7 @@
     <ul>
         {% for publicacion in publicaciones %}
         <li>
-            {{publicacion}}
+            {{publicacion}} | <a href={% url "detalles de publicacion" publicacion.id %}>ver más</a>
         </li>
         {% endfor %}
     </ul>

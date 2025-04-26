@@ -17,8 +17,12 @@ def crear_publicacion(request):
             return redirect("lista de publicaciones")
     else:
         formulario = creacion_publicacion()
-    return render(request, 'inicio/crear_publicacion.html', {"formulario": formulario })
+    return render(request, "inicio/crear_publicacion.html", {"formulario": formulario })
 
 def lista_publicaciones(request):
     publicaciones = publicacion.objects.all()
-    return render(request, 'inicio/lista_publicaciones.html', {'publicaciones': publicaciones})
+    return render(request, "inicio/lista_publicaciones.html", {"publicaciones": publicaciones})
+
+def detalle_publicacion(request, publicacion_especifica):
+    Publicacion = publicacion.objects.get(id=publicacion_especifica)
+    return render(request, "inicio/detalle_publicacion.html", {"pubicacion": Publicacion})

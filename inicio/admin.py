@@ -1,3 +1,4 @@
 from django.contrib import admin
+from inicio.models import publicacion
 
-# Register your models here.
+admin.site.register(publicacion) 
