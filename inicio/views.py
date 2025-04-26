@@ -3,6 +3,7 @@ from inicio.forms import creacion_publicacion
 from inicio.models import publicacion
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 
 def inicio(request):
@@ -34,4 +35,9 @@ class modificarPublicacion(UpdateView):
     model = publicacion
     template_name = "inicio/modificar_publicacion.html"
     fields = ["titulo", "autor"]
+    success_url = reverse_lazy("lista de publicaciones")
+
+class eliminarPublicacion(DeleteView):
+    model = publicacion
+    template_name = "inicio/eliminar_publicacion.html"
     success_url = reverse_lazy("lista de publicaciones")
