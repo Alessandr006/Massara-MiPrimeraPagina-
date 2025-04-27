@@ -1,7 +1,10 @@
+{% extends "base.html" %}
 
+{% block contenido %}
     <h1>Eliminar {{publicacion}}</h1>
     <form action="{% url "eliminar publicación" publicacion.id %}" method="post">
         {% csrf_token %}
         <p>¿Desea borrar esta publicación?</p>
         <input type="submit" value="confirmar borrado">
     </form>
+{% endblock contenido %}

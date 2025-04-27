@@ -1,4 +1,6 @@
+{% extends "base.html" %}
 
+{% block contenido %}
     <h1>lista de publicaciones</h1>
     {% if publicaciones %}
     <ul>
@@ -14,3 +16,4 @@
     {% else %}
     <p>No hay publicaciones creadas</p>
     {% endif %}
+ {% endblock contenido %}
