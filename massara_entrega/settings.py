@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'inicio',
-]
+    'usuario'
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'massara_entrega.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'inicio/template', 'template'], 
+        'DIRS': [BASE_DIR / 'inicio/template', 'usuario/template', 'template'], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
