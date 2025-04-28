@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as django_login
+from usuario.forms import formularioRegistro
 
 def login(request):
     if request.method == "POST":
@@ -12,3 +13,13 @@ def login(request):
     else:
         formulario = AuthenticationForm()
     return render(request, "usuario/login.html", {'formulario': formulario})
+
+def registro(request):
+    if request.method == "POST":
+        formulario = formularioRegistro(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect("login")
+    else:
+        formulario = formularioRegistro()
+    return render(request, "usuario/registro.html", {'formulario': formulario})
