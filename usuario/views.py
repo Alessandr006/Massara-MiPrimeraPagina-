@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as django_login
-from usuario.forms import formularioRegistro
+from usuario.forms import formulario_registro, formulario_editar_perfil
+from django.contrib.auth.decorators import login_required
 
 def login(request):
     if request.method == "POST":
@@ -16,10 +17,21 @@ def login(request):
 
 def registro(request):
     if request.method == "POST":
-        formulario = formularioRegistro(request.POST)
+        formulario = formulario_registro(request.POST)
         if formulario.is_valid():
             formulario.save()
             return redirect("login")
     else:
-        formulario = formularioRegistro()
+        formulario = formulario_registro()
     return render(request, "usuario/registro.html", {'formulario': formulario})
+
+@login_required
+def editar_perfil(request):
+    if request.method == "POST":
+        formulario = formulario_editar_perfil(request.POST, instance=request.user)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect("login")
+    else:
+        formulario = formulario_editar_perfil(instance=request.user)
+    return render(request, "usuario/editar_perfil.html", {'formulario': formulario})

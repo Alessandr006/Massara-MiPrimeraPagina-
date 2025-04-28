@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+    <h1>Editar perfil</h1>
+    <form action="{% url "editar perfil" %}" method="post">
+        {% csrf_token %}
+        {{formulario}}
+        <input type="submit" value="Editar">
+    </form>
+{% endblock contenido %}
