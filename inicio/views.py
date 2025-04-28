@@ -5,10 +5,13 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
+@login_required
 def crear_publicacion(request):
     print("Estos son los datos del GET:" ,request.GET)
     print("Estos son los datos del POST:", request.POST)
@@ -31,13 +34,13 @@ class detallePublicacion(DetailView):
     model = publicacion
     template_name = "inicio/detalle_publicacion.html"
 
-class modificarPublicacion(UpdateView):
+class modificarPublicacion(LoginRequiredMixin, UpdateView):
     model = publicacion
     template_name = "inicio/modificar_publicacion.html"
     fields = ["titulo", "autor"]
     success_url = reverse_lazy("lista de publicaciones")
 
-class eliminarPublicacion(DeleteView):
+class eliminarPublicacion(LoginRequiredMixin, DeleteView):
     model = publicacion
     template_name = "inicio/eliminar_publicacion.html"
     success_url = reverse_lazy("lista de publicaciones")
