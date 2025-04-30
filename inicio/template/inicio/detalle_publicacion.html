@@ -5,4 +5,7 @@
     <p>Titulo: {{publicacion.titulo}}</p>
     <p>Autor: {{publicacion.autor}}</p>
     <p>Fecha: {{publicacion.fecha_publicacion}}</p>
+    {% if publicacion.imagen %}
+    <img src={{publicacion.imagen.url}} alt="" height="150px">
+    {% endif %}
 {% endblock contenido %}

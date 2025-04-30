@@ -2,7 +2,7 @@
 
 {% block contenido %}
     <h1>crear publicación</h1>
-    <form action="{% url "crear publicación" %}" method="post">
+    <form action="{% url "crear publicación" %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{formulario}}
         <input type="submit" value="crear">

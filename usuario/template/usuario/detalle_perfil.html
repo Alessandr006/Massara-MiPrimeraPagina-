@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+    {% if request.user.info_extra.avatar %}
+    <p><img src={{request.user.info_extra.avatar.url}} alt="" height="200px"></p>
+    {% endif %}
+    {% if request.user.first_name %}
+    <p>Nombre: {{request.user.first_name}}</p>
+    <p>Apellido: {{request.user.last_name}}</p>
+    <p>hobbie: {{request.user.hobbie}}</p>
+    <p>Email: {{request.user.email}}</p>
+    {% else %}
+    <p>Ingrese sus datos para poder verlos</p>
+    {% endif %}
+    <a href={% url "editar perfil" %}>editar perfil</a>
+{% endblock contenido %}

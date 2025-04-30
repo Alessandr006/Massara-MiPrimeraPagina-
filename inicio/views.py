@@ -16,14 +16,14 @@ def crear_publicacion(request):
     print("Estos son los datos del GET:" ,request.GET)
     print("Estos son los datos del POST:", request.POST)
     if request.method == "POST":
-        formulario = creacion_publicacion(request.POST)
+        formulario = creacion_publicacion(request.POST, request.FILES)
         if formulario.is_valid():
             info = formulario.cleaned_data
-            Publicacion = publicacion(titulo = info.get("titulo"), autor = info.get("autor"), fecha_publicacion = info.get("fecha_publicacion"))
+            Publicacion = publicacion(titulo = info.get("titulo"), autor = info.get("autor"), fecha_publicacion = info.get("fecha_publicacion"), imagen = info.get("imagen"))
             Publicacion.save()
             return redirect("lista de publicaciones")
     else:
-        formulario = creacion_publicacion()
+        formulario = creacion_publicacion(initial={'imagen': publicacion.imagen})
     return render(request, "inicio/crear_publicacion.html", {"formulario": formulario })
 
 def lista_publicaciones(request):
@@ -37,7 +37,7 @@ class detallePublicacion(DetailView):
 class modificarPublicacion(LoginRequiredMixin, UpdateView):
     model = publicacion
     template_name = "inicio/modificar_publicacion.html"
-    fields = ["titulo", "autor"]
+    fields = ["titulo", "autor", 'imagen']
     success_url = reverse_lazy("lista de publicaciones")
 
 class eliminarPublicacion(LoginRequiredMixin, DeleteView):

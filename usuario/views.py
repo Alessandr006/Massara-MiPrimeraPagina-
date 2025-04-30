@@ -11,7 +11,7 @@ def login(request):
         if formulario.is_valid():
             usuario = formulario.get_user()
             django_login(request, usuario)
-            info_extra.objects.get_or_create(user = usuario)
+            info_extra.objects.get_or_create(user=usuario)
             return redirect("inicio")
     else:
         formulario = AuthenticationForm()
@@ -37,7 +37,10 @@ def editar_perfil(request):
                 info_extra.avatar = formulario.cleaned_data.get('avatar')
             info_extra.save()
             formulario.save()
-            return redirect("login")
+            return redirect("detalle perfil")
     else:
         formulario = formulario_editar_perfil(initial={'avatar': info_extra.avatar}, instance=request.user)
     return render(request, "usuario/editar_perfil.html", {'formulario': formulario})
+
+def detalle_publicacion(request):
+    return render(request, "usuario/detalle_perfil.html")

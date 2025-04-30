@@ -2,7 +2,7 @@
 
 {% block contenido %}
     <h1>Modificar {{publicación}}</h1>
-    <form action="{% url "modificar publicación" publicacion.id %}" method="post">
+    <form action="{% url "modificar publicación" publicacion.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="modificar">
