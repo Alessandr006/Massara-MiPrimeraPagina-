@@ -50,8 +50,8 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">          
                         {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url "detalle perfil" %}>
-                            {% if request.user.info_extra.avatar %}
-                                <img src={{request.user.info_extra.avatar.url}} alt="" height="40px">
+                            {% if request.info_extra.avatar %}
+                                <img src={{request.info_extra.avatar.url}} alt="" height="40px">
                             {% endif %}
                         {{request.user.username}}</a></li>
                         <form action={% url "logout" %} method="post">
@@ -67,8 +67,6 @@
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href= {% url "crear publicación" %}>Crear publicación</a></li>
                                 <li><a class="dropdown-item" href= {% url "lista de publicaciones" %}>Lista de publicaciones</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
                     </ul>

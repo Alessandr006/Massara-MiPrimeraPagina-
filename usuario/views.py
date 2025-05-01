@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as django_login
-from usuario.forms import formulario_registro, formulario_editar_perfil
+from usuario.forms import formulario_registro, formulario_editar_perfil, formulario_info_extra
 from django.contrib.auth.decorators import login_required
 from usuario.models import info_extra
 
@@ -29,18 +29,28 @@ def registro(request):
 
 @login_required
 def editar_perfil(request):
-    info_extra = request.user.info_extra
+    user = request.user
+    informacion_extra, created = info_extra.objects.get_or_create(user=user)
     if request.method == "POST":
-        formulario = formulario_editar_perfil(request.POST, request.FILES, instance=request.user)
-        if formulario.is_valid():
-            if formulario.cleaned_data.get('avatar'):
-                info_extra.avatar = formulario.cleaned_data.get('avatar')
-            info_extra.save()
+        formulario = formulario_editar_perfil(request.POST, instance=request.user)
+        formulario_informacion = formulario_info_extra(request.POST, request.FILES, instance=informacion_extra)
+        if formulario.is_valid() and formulario_informacion.is_valid(): 
+            informacion_extra.save()
+            formulario_informacion.save()
             formulario.save()
             return redirect("detalle perfil")
     else:
-        formulario = formulario_editar_perfil(initial={'avatar': info_extra.avatar}, instance=request.user)
-    return render(request, "usuario/editar_perfil.html", {'formulario': formulario})
+        formulario = formulario_editar_perfil( instance=request.user)
+        formulario_informacion = formulario_info_extra(instance=informacion_extra)
+    return render(request, "usuario/editar_perfil.html", {
+        'formulario': formulario,
+        'formulario_informacion': formulario_informacion
+    })
 
-def detalle_publicacion(request):
-    return render(request, "usuario/detalle_perfil.html")
+def detalle_perfil(request):
+    user = request.user
+    informacion_extra = info_extra.objects.get(user=user)
+    return render(request, "usuario/detalle_perfil.html", {
+        'usuario': user,
+        'informacion_extra': informacion_extra
+    })

@@ -4,3 +4,4 @@ from django.contrib.auth.models import User
 class info_extra(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to= "avatares", null=True, blank=True)
+    hobbie = models.CharField(max_length=100, null=True, blank=True)
